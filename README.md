@@ -2,6 +2,12 @@
 
 A simple Qt-based calculator GUI that talks to a backend over standard input/output.
 
+---
+
+If you just want to pull the whole project and build copy `install.sh` to you local computer `chmod +x ./install.sh` and run `./install.sh`
+
+---
+
 The backend can be implemented in **PHP** (default) or **Bash**, and is selected at runtime:
 
 - `./qt-calculator-gui` → uses `Calculator.php` (PHP backend, default)
