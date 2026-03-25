@@ -71,7 +71,7 @@ These are installed via:
 
 which internally uses:
 
-- `groot dnf groupinstall "C Development Tools and Libraries"`
+- `dnf group install "c-development"`
 - `groot dnf install qt5-qtbase-devel qt5-qttools-devel gcc-c++ make`
 - `groot dnf install php-cli bc`
 
