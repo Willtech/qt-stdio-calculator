@@ -4,7 +4,7 @@ A simple Qt-based calculator GUI that talks to a backend over standard input/out
 
 ---
 
-If you just want to pull the whole project and build copy `install.sh` to you local computer `chmod +x ./install.sh` and run `./install.sh`
+If you just want to pull the whole project and build copy `install.sh` to you local computer `chmod +x ./install.sh` and run `./install.sh` then `cd ./qt-stdio-calculator` and run `./qt-stdio-calculator`
 
 ---
 

@@ -47,4 +47,6 @@ make deps
 echo "[qt-stdio-calculator] Building project..."
 make build
 
-echo "[qt-stdio-calculator] Build complete. You can run ./qt-calculator-gui now."
+echo "[qt-stdio-calculator] Build complete."
+echo "[qt-stdio-calculator] Run \`cd ./qt-calculator-gui\`"
+echo "[qt-stdio-calculator] You can run ./qt-calculator-gui now."
