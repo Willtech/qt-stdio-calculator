@@ -79,7 +79,7 @@ These are installed via:
 
 which internally uses:
 
-- `dnf group install "c-development"`
+- `groot dnf group install "c-development"`
 - `groot dnf install qt5-qtbase-devel qt5-qttools-devel gcc-c++ make`
 - `groot dnf install php-cli bc`
 
