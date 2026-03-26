@@ -1,0 +1,14 @@
+[Desktop Entry]
+# qt-stdio-calculator desktop entry
+# Copyright (c) 2025 Graduate. Damian Williamson.
+# Licensed under the MIT License.
+
+Type=Application
+Name=STDIO Calculator
+GenericName=Calculator
+Comment=Qt-based calculator using stdio backends (PHP/Bash)
+Exec=/usr/local/bin/qt-calculator-gui
+Icon=accessories-calculator
+Terminal=false
+Categories=Utility;Calculator;
+StartupNotify=true

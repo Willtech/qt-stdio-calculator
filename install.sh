@@ -19,7 +19,6 @@ REPO_DIR="qt-stdio-calculator"
 
 echo "[qt-stdio-calculator] Bootstrapping installation..."
 
-# Install git if missing.
 if ! command -v git >/dev/null 2>&1; then
     echo "[qt-stdio-calculator] git not found, installing..."
     if command -v groot >/dev/null 2>&1; then
@@ -29,7 +28,6 @@ if ! command -v git >/dev/null 2>&1; then
     fi
 fi
 
-# Clone the repository if not already present.
 if [ ! -d "$REPO_DIR" ]; then
     echo "[qt-stdio-calculator] Cloning repository from $REPO_URL..."
     git clone "$REPO_URL"
@@ -39,11 +37,9 @@ fi
 
 cd "$REPO_DIR"
 
-# Ensure groot is installed via Makefile target.
 echo "[qt-stdio-calculator] Ensuring groot and dependencies..."
 make deps
 
-# Build the project.
 echo "[qt-stdio-calculator] Building project..."
 make build
 

@@ -2,9 +2,22 @@
  * qt-stdio-calculator
  * Simple Qt GUI calculator using stdio backends (Bash/PHP).
  *
- * Copyright (c) 2025 Graduate. Damian Williamson
+ * Backends are installed into:
+ *   /usr/local/libexec/qt-stdio-calculator/
+ *
+ * Protocol (backend → GUI):
+ *   DISPLAY <value> <op>
+ *
+ * The GUI shows in a single box:
+ *   Line 1: <value>
+ *   Line 2: <op> (with "/" rendered as "÷")
+ *
+ * ---------------------------------------------------------------------------
+ * Copyright (c) 2025
+ * Graduate. Damian Williamson.
  * Licensed under the MIT License.
- * Created collaboratively by MR and Copilot (Microsoft AI).
+ * Created collaboratively by Graduate. Damian Williamson and Copilot (Microsoft AI).
+ * ---------------------------------------------------------------------------
  */
 
 #include <QApplication>

@@ -1,29 +1,34 @@
 #!/usr/bin/env bash
 #
 # Calculator.sh
-# Simple line-based calculator backend for qt-stdio-calculator.
+# Bash backend for qt-stdio-calculator.
 #
 # Protocol:
-#   GUI → this script:   "KEY <symbol>"
-#   this script → GUI:   "DISPLAY <value>"
+#   GUI → backend:   "KEY <symbol>"
+#   backend → GUI:   "DISPLAY <value> <op>"
+#
+# <value> = current numeric display
+# <op>    = C, +, -, *, /, =, or empty
+#
+# Continued mathematics:
+#   2 + 3 = 5, then pressing * 4 = gives 20, etc.
 #
 # Copyright (c) 2025 Graduate. Damian Williamson.
 # Licensed under the MIT License.
 # Created collaboratively by Graduate. Damian Williamson and Copilot (Microsoft AI).
 
-# Send a DISPLAY message to the GUI.
 update_display() {
-    printf "DISPLAY %s\n" "$1"
+    # $1 = value, $2 = operator
+    printf "DISPLAY %s %s\n" "$1" "$2"
 }
 
 current=""
 operand=""
 operator=""
 
-# Initialize display.
-update_display "0"
+# Initial display
+update_display "0" ""
 
-# Main loop: read KEY commands from stdin.
 while IFS= read -r line; do
     [[ -z "$line" ]] && continue
 
@@ -32,32 +37,42 @@ while IFS= read -r line; do
 
         case "$key" in
             C)
-                # Clear all state.
                 current=""
                 operand=""
                 operator=""
-                update_display "0"
+                update_display "0" "C"
                 ;;
             "+"|"-"|"*"|"/")
-                # Store operator and move current into operand.
-                operand="$current"
-                operator="$key"
-                current=""
+                # If we already have operand/operator/current, compute first (continued maths)
+                if [[ -n "$operand" && -n "$operator" && -n "$current" ]]; then
+                    result=$(echo "$operand $operator $current" | bc 2>/dev/null)
+                    operand="$result"
+                    current=""
+                    operator="$key"
+                    update_display "$operand" "$operator"
+                else
+                    # Start a new operation
+                    operand="$current"
+                    current=""
+                    operator="$key"
+                    update_display "$operand" "$operator"
+                fi
                 ;;
             "=")
-                # Perform calculation if we have a full expression.
                 if [[ -n "$operand" && -n "$operator" && -n "$current" ]]; then
                     result=$(echo "$operand $operator $current" | bc 2>/dev/null)
                     current="$result"
                     operand=""
-                    operator=""
-                    update_display "$current"
+                    operator="="
+                    update_display "$current" "$operator"
+                else
+                    # No full expression; just echo current
+                    update_display "${current:-0}" "="
                 fi
                 ;;
             [0-9])
-                # Append digit to current input.
                 current+="$key"
-                update_display "$current"
+                update_display "$current" "$operator"
                 ;;
         esac
     fi

@@ -1,0 +1,51 @@
+.\" qt-calculator-gui(1) — STDIO Calculator GUI
+.\" Copyright (c) 2025 Graduate. Damian Williamson.
+.\" Licensed under the MIT License.
+
+.TH QT-CALCULATOR-GUI 1 "March 2025" "qt-stdio-calculator" "User Commands"
+
+.SH NAME
+qt-calculator-gui \- Qt-based calculator using stdio backends
+
+.SH SYNOPSIS
+.B qt-calculator-gui
+[\fB--PHP\fR] [\fB--BASH\fR]
+
+.SH DESCRIPTION
+qt-calculator-gui is a Qt Widgets calculator that communicates with a backend
+over standard input/output. Backends are installed in:
+
+/usr/local/libexec/qt-stdio-calculator/
+
+The GUI shows a two-line display:
+
+Line 1: current numeric value
+.br
+Line 2: current operator (C, +, -, *, ÷, =)
+
+The division operator is displayed as "÷" while the backend still uses "/".
+
+.SH OPTIONS
+.TP
+.B --PHP
+Use Calculator.php (default).
+.TP
+.B --BASH
+Use Calculator.sh.
+
+.SH FILES
+/usr/local/bin/qt-calculator-gui
+.br
+/usr/local/libexec/qt-stdio-calculator/Calculator.php
+.br
+/usr/local/libexec/qt-stdio-calculator/Calculator.sh
+.br
+/usr/share/applications/qt-calculator-gui.desktop
+
+.SH AUTHOR
+Graduate. Damian Williamson.
+.br
+AI Collaboration: Copilot (Microsoft AI).
+
+.SH LICENSE
+MIT License.
