@@ -44,7 +44,7 @@ $(TARGET): $(QMAKE_OUT) $(SOURCES) $(HEADERS)
 # ---------------------------------------------------------------------------
 
 deps: ensure-groot
-    ./install-deps.sh
+	./install-deps.sh
 
 ensure-groot:
 	@if ! command -v groot >/dev/null 2>&1; then \
