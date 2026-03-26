@@ -34,7 +34,7 @@ ensure-groot:
 				git clone https://github.com/Willtech/groot.git; \
 			fi; \
 		cd groot; \
-			./install.sh || sudo ./install.sh || true; \
+			sudo dnf install groot-1.3.0-1.fc43.x86_64.rpm; \
 		}; \
 	else \
 		echo "[qt-stdio-calculator] groot already installed."; \
