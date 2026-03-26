@@ -66,7 +66,7 @@ install -m 0644 LICENSE %{buildroot}/usr/local/share/licenses/qt-stdio-calculato
 /usr/local/libexec/qt-stdio-calculator/Calculator.php
 /usr/local/libexec/qt-stdio-calculator/manpage.installer
 /usr/share/applications/qt-calculator-gui.desktop
-/usr/share/man/man1/qt-calculator-gui.1
+/usr/share/man/man1/qt-calculator-gui.1.gz
 /usr/local/share/doc/qt-stdio-calculator/README.md
 /usr/local/share/licenses/qt-stdio-calculator/LICENSE
 
