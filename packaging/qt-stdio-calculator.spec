@@ -1,4 +1,5 @@
 Name:           qt-stdio-calculator
+%global debug_package %{nil}
 Version:        1.0.0
 Release:        1%{?dist}
 Summary:        Qt-based calculator using stdio backends (PHP/Bash)
