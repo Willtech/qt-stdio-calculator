@@ -15,11 +15,13 @@ BINDIR      := $(PREFIX)/bin
 LIBEXECDIR  := $(PREFIX)/libexec/qt-stdio-calculator
 DESKTOPDIR  := /usr/share/applications
 MANDIR      := /usr/share/man/man1
+DOCDIR      := $(PREFIX)/share/doc/qt-stdio-calculator
+LICENSEDIR  := $(PREFIX)/share/licenses/qt-stdio-calculator
 
 SOURCES := $(wildcard *.cpp)
 HEADERS := $(wildcard *.h)
 
-.PHONY: all build clean deps ensure-groot install install-backends install-desktop install-man
+.PHONY: all build clean deps ensure-groot install install-backends install-desktop install-man install-docs
 
 # ---------------------------------------------------------------------------
 # Build targets
@@ -64,7 +66,7 @@ ensure-groot:
 # Installation targets
 # ---------------------------------------------------------------------------
 
-install: $(TARGET) install-backends install-desktop install-man
+install: $(TARGET) install-backends install-desktop install-man install-docs
     @echo "[qt-stdio-calculator] Installing binary to $(BINDIR)..."
     @mkdir -p "$(BINDIR)"
     @cp "$(TARGET)" "$(BINDIR)/$(TARGET)"
@@ -92,6 +94,15 @@ install-man:
     @cp qt-calculator-gui.1 "$(MANDIR)/qt-calculator-gui.1"
     @gzip -f "$(MANDIR)/qt-calculator-gui.1" || true
     @chmod 644 "$(MANDIR)/qt-calculator-gui.1.gz"
+
+install-docs:
+    @echo "[qt-stdio-calculator] Installing LICENSE + README..."
+    @mkdir -p "$(DOCDIR)"
+    @mkdir -p "$(LICENSEDIR)"
+    @cp README.md "$(DOCDIR)/README.md"
+    @cp LICENSE "$(LICENSEDIR)/LICENSE"
+    @chmod 644 "$(DOCDIR)/README.md"
+    @chmod 644 "$(LICENSEDIR)/LICENSE"
 
 # ---------------------------------------------------------------------------
 # Cleanup
