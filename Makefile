@@ -1,7 +1,8 @@
 # Makefile
 # Top-level build and dependency orchestration for qt-stdio-calculator.
 #
-# Copyright (c) 2025 Graduate. Damian Williamson.
+# Copyright (c) 2025
+# Graduate. Damian Williamson.
 # Licensed under the MIT License.
 
 PROJECT_DIR := $(CURDIR)
@@ -15,15 +16,30 @@ LIBEXECDIR  := $(PREFIX)/libexec/qt-stdio-calculator
 DESKTOPDIR  := /usr/share/applications
 MANDIR      := /usr/share/man/man1
 
+SOURCES := $(wildcard *.cpp)
+HEADERS := $(wildcard *.h)
+
 .PHONY: all build clean deps ensure-groot install install-backends install-desktop install-man
+
+# ---------------------------------------------------------------------------
+# Build targets
+# ---------------------------------------------------------------------------
 
 all: build
 
 build: $(TARGET)
 
-$(TARGET): main.cpp calculator.pro
+# Regenerate Makefile.qt whenever any source/header changes
+$(QMAKE_OUT): calculator.pro $(SOURCES) $(HEADERS)
     $(QMAKE) -o $(QMAKE_OUT) calculator.pro
+
+# Build the binary using qmake-generated Makefile
+$(TARGET): $(QMAKE_OUT) $(SOURCES) $(HEADERS)
     $(MAKE) -f $(QMAKE_OUT)
+
+# ---------------------------------------------------------------------------
+# Dependency installation (groot + install-deps.sh)
+# ---------------------------------------------------------------------------
 
 deps: ensure-groot
     ./install-deps.sh
@@ -44,20 +60,25 @@ ensure-groot:
     fi; \
     groot --version
 
+# ---------------------------------------------------------------------------
+# Installation targets
+# ---------------------------------------------------------------------------
+
 install: $(TARGET) install-backends install-desktop install-man
     @echo "[qt-stdio-calculator] Installing binary to $(BINDIR)..."
     @mkdir -p "$(BINDIR)"
     @cp "$(TARGET)" "$(BINDIR)/$(TARGET)"
     @chmod 755 "$(BINDIR)/$(TARGET)"
-    @echo "[qt-stdio-calculator] Installed $(TARGET)."
 
 install-backends:
     @echo "[qt-stdio-calculator] Installing backends..."
     @mkdir -p "$(LIBEXECDIR)"
     @cp Calculator.sh "$(LIBEXECDIR)/Calculator.sh"
     @cp Calculator.php "$(LIBEXECDIR)/Calculator.php"
+    @cp manpage.installer "$(LIBEXECDIR)/manpage.installer"
     @chmod 755 "$(LIBEXECDIR)/Calculator.sh"
     @chmod 755 "$(LIBEXECDIR)/Calculator.php"
+    @chmod 755 "$(LIBEXECDIR)/manpage.installer"
 
 install-desktop:
     @echo "[qt-stdio-calculator] Installing desktop entry..."
@@ -70,7 +91,11 @@ install-man:
     @mkdir -p "$(MANDIR)"
     @cp qt-calculator-gui.1 "$(MANDIR)/qt-calculator-gui.1"
     @gzip -f "$(MANDIR)/qt-calculator-gui.1" || true
-    @mandb >/dev/null 2>&1 || true
+    @chmod 644 "$(MANDIR)/qt-calculator-gui.1.gz"
+
+# ---------------------------------------------------------------------------
+# Cleanup
+# ---------------------------------------------------------------------------
 
 clean:
     @if [ -f "$(QMAKE_OUT)" ]; then \
