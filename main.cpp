@@ -114,16 +114,18 @@ public:
         // Decide which backend to use:
         // - Default: Calculator.php
         // - Override: --BASH or --PHP on the command line.
-        QString backendProgram = QCoreApplication::applicationDirPath() + "/Calculator.php";
+        QString base = "/usr/local/libexec/qt-stdio-calculator/";
+
+        QString backendProgram = base + "Calculator.php";  // default backend
 
         const QStringList args = QCoreApplication::arguments();
+
         if (args.contains("--BASH", Qt::CaseInsensitive)) {
-            backendProgram = QCoreApplication::applicationDirPath() + "/Calculator.sh";
+            backendProgram = base + "Calculator.sh";
         } else if (args.contains("--PHP", Qt::CaseInsensitive)) {
-            backendProgram = QCoreApplication::applicationDirPath() + "/Calculator.php";
+            backendProgram = base + "Calculator.php";
         }
 
-        // Launch the backend process.
         backend = new QProcess(this);
         backend->setProgram(backendProgram);
         backend->start();
