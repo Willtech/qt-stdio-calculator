@@ -204,6 +204,5 @@ SOFTWARE.
 - Concept, architecture, and identity conventions: **Graduate. Damian Williamson.**
 - Implementation and iteration: **Graduate. Damian Williamson.** and **Copilot (Microsoft AI)**.
 - Privilege wrapper: [`groot`](https://github.com/Willtech/groot) by Willtech.
-```
 
 [1]: https://github.com/Willtech/qt-stdio-calculator/blob/working/images/qt-calculatort-gui.png
