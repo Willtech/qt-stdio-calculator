@@ -185,12 +185,12 @@ protected:
             case Qt::Key_Slash:
                 sendKey("/");
                 return;
+            case Qt::Key_C:
+                sendKey("C");
+                return;
             case Qt::Key_Enter:
             case Qt::Key_Return:
                 sendKey("=");
-                return;
-            case Qt::Key_C:
-                sendKey("C");
                 return;
             default:
                 break;
