@@ -29,6 +29,7 @@
 #include <QTextStream>
 #include <QCoreApplication>
 #include <QDebug>
+#include <QKeyEvent>
 
 /*
  * Custom Qt message handler to suppress specific noisy warnings:
@@ -146,6 +147,57 @@ public:
                 backend->waitForFinished(1000);
             }
         }
+    }
+
+protected:
+    /*
+     * keyPressEvent()
+     *
+     * Map physical keys directly to calculator symbols:
+     *  - 0–9 → "0"–"9"
+     *  - + - * / → "+", "-", "*", "/"
+     *  - Enter/Return → "="
+     *  - C/c → "C"
+     */
+    void keyPressEvent(QKeyEvent *event) override
+    {
+        if (event->modifiers() == Qt::NoModifier) {
+            int key = event->key();
+
+            // Digits 0–9
+            if (key >= Qt::Key_0 && key <= Qt::Key_9) {
+                QString digit = QString::number(key - Qt::Key_0);
+                sendKey(digit);
+                return;
+            }
+
+            // Operators
+            switch (key) {
+            case Qt::Key_Plus:
+                sendKey("+");
+                return;
+            case Qt::Key_Minus:
+                sendKey("-");
+                return;
+            case Qt::Key_Asterisk:
+                sendKey("*");
+                return;
+            case Qt::Key_Slash:
+                sendKey("/");
+                return;
+            case Qt::Key_Enter:
+            case Qt::Key_Return:
+                sendKey("=");
+                return;
+            case Qt::Key_C:
+                sendKey("C");
+                return;
+            default:
+                break;
+            }
+        }
+
+        QWidget::keyPressEvent(event);
     }
 
 private slots:
