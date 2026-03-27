@@ -10,6 +10,10 @@ Privilege wrapper: [`groot`](https://github.com/Willtech/groot) by Willtech.
 
 ---
 
+![qt-calculator-gui][1]
+
+---
+
 The backend can be implemented in **PHP** (default) or **Bash**, and is selected at runtime:
 
 - `./qt-calculator-gui` → uses `Calculator.php` (PHP backend, default)
@@ -201,3 +205,5 @@ SOFTWARE.
 - Implementation and iteration: **Graduate. Damian Williamson.** and **Copilot (Microsoft AI)**.
 - Privilege wrapper: [`groot`](https://github.com/Willtech/groot) by Willtech.
 ```
+
+[1]: https://github.com/Willtech/qt-stdio-calculator/blob/working/images/qt-calculatort-gui.png
