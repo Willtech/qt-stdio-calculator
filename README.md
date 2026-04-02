@@ -2,6 +2,8 @@
 
 A simple Qt-based calculator GUI that talks to a backend over standard input/output.
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Willtech/qt-stdio-calculator)  
+
 ---
 
 If you just want to pull the whole project and build copy `install.sh` to you local computer `chmod +x ./install.sh` and run `./install.sh` then `cd ./qt-stdio-calculator` and run `./qt-stdio-calculator`
